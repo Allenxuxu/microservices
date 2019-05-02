@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+package go.micro.srv.user;
+
+service UserService {
+    rpc Create (User) returns (Response) {}
+    rpc Delete (User) returns (Response) {}
+    rpc Get (User) returns (User) {}
+    rpc GetAll (Request) returns (Users) {}
+    rpc UpdateInfo (User) returns (Response) {}
+    rpc Auth (User) returns (Token) {}
+    rpc Ping(Request) returns (Response) {}
+}
+
+// 用户信息
+message User {
+    string id = 1;
+    string name = 2;
+    string company = 3;
+	string email = 4;
+	string tel = 5;
+    string password = 6;
+}
+
+message Request {
+}
+message Response {
+}
+
+message ToRevokeToken {
+    string id = 1;
+    string token = 2;
+}
+
+message Users {
+    repeated User users = 1;
+}
+
+message Token {
+    string token = 1;
+}
