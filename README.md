@@ -1,10 +1,7 @@
 
 # microservices
 使用micro微服务框架的一些例子，包含微服务开发中必备的鉴权，熔断，监控，链路追踪等
-> 本项目使用consul的K/V存储来模拟一个配置中心。
-在每一个使用到lib/token包的服务都会在main函数里传递consul地址和JWT私钥的加载路径。
-在srv/user服务中同样，使用consul K/V 来存储mysql数据库的配置。
-在启动服务之前，需要现在consul的K/V中设置好这些配置。
+> 本项目使用consul的K/V存储来模拟一个配置中心。在每一个使用到lib/token包的服务都会在main函数里传递consul地址和JWT私钥的加载路径。在srv/user服务中同样，使用consul K/V 来存储mysql数据库的配置。在启动服务之前，需要现在consul的K/V中设置好这些配置。
 ![image](https://github.com/Allenxuxu/microservices/raw/master/.screenshots/jwt-config.png)
 ![image](https://github.com/Allenxuxu/microservices/raw/master/.screenshots/mysql-config.png)
 
