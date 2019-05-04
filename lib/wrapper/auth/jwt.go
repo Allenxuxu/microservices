@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	"microservice/lib/token"
+	"microservices/lib/token"
 
 	"github.com/micro/micro/plugin"
 )

@@ -2,7 +2,7 @@ package db
 
 import (
 	"fmt"
-	pb "microservice/srv/user/proto/user"
+	pb "microservices/srv/user/proto/user"
 
 	"github.com/micro/go-log"
 

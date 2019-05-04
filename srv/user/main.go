@@ -1,11 +1,11 @@
 package main
 
 import (
-	"microservice/lib/token"
-	"microservice/lib/tracer"
-	_ "microservice/srv/user/db"
-	"microservice/srv/user/handler"
-	pb "microservice/srv/user/proto/user"
+	"microservices/lib/token"
+	"microservices/lib/tracer"
+	_ "microservices/srv/user/db"
+	"microservices/srv/user/handler"
+	pb "microservices/srv/user/proto/user"
 
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"

@@ -1,10 +1,10 @@
 package main
 
 import (
-	"microservice/api/user/handler"
-	"microservice/lib/token"
-	"microservice/lib/tracer"
-	"microservice/lib/wrapper/tracer/opentracing/gin2micro"
+	"microservices/api/user/handler"
+	"microservices/lib/token"
+	"microservices/lib/tracer"
+	"microservices/lib/wrapper/tracer/opentracing/gin2micro"
 
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-log"

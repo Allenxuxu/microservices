@@ -6,7 +6,7 @@ import (
 	"log"
 	"net/http"
 
-	status_code "microservice/lib/http"
+	status_code "microservices/lib/http"
 
 	"github.com/afex/hystrix-go/hystrix"
 )

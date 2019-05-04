@@ -5,7 +5,7 @@ This is the Hello service
 Generated with
 
 ```
-micro new microservice/srv/hello --namespace=go.micro --type=srv
+micro new microservices/srv/hello --namespace=go.micro --type=srv
 ```
 
 ## Getting Started

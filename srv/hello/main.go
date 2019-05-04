@@ -1,15 +1,15 @@
 package main
 
 import (
-	"microservice/lib/tracer"
-	"microservice/srv/hello/handler"
+	"microservices/lib/tracer"
+	"microservices/srv/hello/handler"
 
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
 	opentracing "github.com/opentracing/opentracing-go"
 	ocplugin "github.com/micro/go-plugins/wrapper/trace/opentracing"
 
-	example "microservice/srv/hello/proto/example"
+	example "microservices/srv/hello/proto/example"
 )
 
 func main() {
