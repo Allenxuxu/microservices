@@ -95,3 +95,5 @@ scrape_configs:
   cd srv/hello && make run
   ```
 - 浏览器访问 http://127.0.0.1:8080/user/test ，或者使用其他工具 GET 127.0.0.1:8080/user/test
+
+![image](https://github.com/Allenxuxu/microservices/raw/master/.screenshots/consul-service.png)
