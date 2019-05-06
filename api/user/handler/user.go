@@ -49,13 +49,13 @@ func (s *UserAPIService) Anything(c *gin.Context) {
 	}
 	log.Log(res)
 
-	userres, err := s.userC.Ping(ctx, &userS.Request{})
-	if err != nil {
-		log.Log(err)
-		c.AbortWithError(http.StatusInternalServerError, err)
-		return
-	}
-	log.Log(userres)
+	// userres, err := s.userC.Ping(ctx, &userS.Request{})
+	// if err != nil {
+	// 	log.Log(err)
+	// 	c.AbortWithError(http.StatusInternalServerError, err)
+	// 	return
+	// }
+	// log.Log(userres)
 
 	c.JSON(http.StatusOK, map[string]string{
 		"message": "Hi, this is the Greeter API",
@@ -64,7 +64,7 @@ func (s *UserAPIService) Anything(c *gin.Context) {
 
 // Create 新建一个用户
 // {
-// 	"name":"徐旭",
+// 	"name":"xx",
 // 	"email": "123.@qq.com",
 // 	"tel":"tel1",
 // 	"password":"d"

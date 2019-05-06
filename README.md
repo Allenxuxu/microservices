@@ -73,3 +73,25 @@ scrape_configs:
   - targets:
     - 10.104.34.106:8080   #10.104.34.106为本机ip， 本机127.0.0.1在容器中无法访问到
 ```
+## 快速体验
+- 使用docker 启动consul jaeger hystrix-dashboard (上面有参考命令，复制粘贴执行即可)
+
+- 打开浏览器，进入 http://localhost:8500，进入K/V存储设置JWT私钥配置(参考上面的截图)
+
+- jaeger UI http://localhost:16686
+
+- hystrix-dashboard UI http://localhost:8081/hystrix, 输入 http://{ip}:81/hystrix.stream , 此处ip为本机ip，因为hystrix-dashboard是容器启动的，无法直接访问本机127.0.0.1
+
+- 启动API网关： 
+  ```
+  cd micro && make run
+  ```
+- 启动user API服务： 
+  ```
+  cd api/user &&  make run
+  ```
+- 启动hello 服务： 
+  ```
+  cd srv/hello && make run
+  ```
+- 浏览器访问 http://127.0.0.1:8080/user/test ，或者使用其他工具 GET 127.0.0.1:8080/user/test

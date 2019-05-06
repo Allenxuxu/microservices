@@ -8,8 +8,7 @@ proto:
 
 .PHONY: build
 build: proto
-
-	go build -o hello-srv main.go plugin.go
+	go build -o ../../build/helloSRV main.go plugin.go
 
 .PHONY: test
 test:
@@ -18,3 +17,7 @@ test:
 .PHONY: docker
 docker:
 	docker build . -t hello-srv:latest
+
+.PHONY: run
+run:build
+	../../build/helloSRV  --registry=consul 
