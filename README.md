@@ -16,6 +16,7 @@
   - 熔断
   - prometheus监控
   - 链路追踪
+- 内部服务采用grpc通信
 ## 详细讲解
 [个人博客](https://blog.mogutou.xyz/blog/cate/xuxu/Go-Micor)
 ## 使用到的其他软件

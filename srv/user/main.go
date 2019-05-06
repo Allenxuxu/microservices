@@ -7,6 +7,7 @@ import (
 	"microservices/srv/user/handler"
 	pb "microservices/srv/user/proto/user"
 
+	"github.com/micro/go-grpc"
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
 	ocplugin "github.com/micro/go-plugins/wrapper/trace/opentracing"
@@ -23,7 +24,7 @@ func main() {
 	defer io.Close()
 	opentracing.SetGlobalTracer(t)
 
-	service := micro.NewService(
+	service := grpc.NewService(
 		micro.Name(name),
 		micro.Version("latest"),
 		micro.WrapHandler(ocplugin.NewHandlerWrapper(opentracing.GlobalTracer())),

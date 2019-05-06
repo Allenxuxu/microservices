@@ -7,6 +7,7 @@ import (
 	"microservices/lib/wrapper/tracer/opentracing/gin2micro"
 
 	"github.com/gin-gonic/gin"
+	"github.com/micro/go-grpc"
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro/client"
 	hystrixplugin "github.com/micro/go-plugins/wrapper/breaker/hystrix"
@@ -28,6 +29,7 @@ func main() {
 	service := web.NewService(
 		web.Name(name),
 		web.Version("lastest"),
+		web.MicroService(grpc.NewService()),
 	)
 
 	if err := service.Init(); err != nil {
