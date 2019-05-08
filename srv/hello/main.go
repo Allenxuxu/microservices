@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"microservices/lib/tracer"
 	"microservices/srv/hello/handler"
 
@@ -25,6 +27,8 @@ func main() {
 	service := grpc.NewService(
 		micro.Name("go.micro.srv.hello"),
 		micro.WrapHandler(ocplugin.NewHandlerWrapper(t)),
+		micro.RegisterTTL(time.Second*15),
+		micro.RegisterInterval(time.Second*10),
 		// micro.Version("latest"),
 	)
 

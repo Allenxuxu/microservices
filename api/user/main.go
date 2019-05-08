@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"microservices/api/user/handler"
 	"microservices/lib/token"
 	"microservices/lib/tracer"
@@ -29,6 +31,8 @@ func main() {
 	service := web.NewService(
 		web.Name(name),
 		web.Version("lastest"),
+		web.RegisterTTL(time.Second*15),
+		web.RegisterInterval(time.Second*10),
 		web.MicroService(grpc.NewService()),
 	)
 

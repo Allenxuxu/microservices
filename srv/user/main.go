@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"microservices/lib/token"
 	"microservices/lib/tracer"
 	_ "microservices/srv/user/db"
@@ -27,6 +29,8 @@ func main() {
 	service := grpc.NewService(
 		micro.Name(name),
 		micro.Version("latest"),
+		micro.RegisterTTL(time.Second*15),
+		micro.RegisterInterval(time.Second*10),
 		micro.WrapHandler(ocplugin.NewHandlerWrapper(opentracing.GlobalTracer())),
 	)
 	service.Init()
