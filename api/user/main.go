@@ -40,9 +40,8 @@ func main() {
 		log.Fatal(err)
 	}
 
-	sClient := service.Options().Service.Client()
+	sClient := hystrixplugin.NewClientWrapper()(service.Options().Service.Client())
 	sClient.Init(
-		client.Wrap(hystrixplugin.NewClientWrapper()),
 		client.WrapCall(ocplugin.NewCallWrapper(t)),
 	)
 
