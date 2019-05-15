@@ -1,7 +1,10 @@
 package main
 
 import (
+	"context"
 	"time"
+
+	"github.com/afex/hystrix-go/hystrix"
 
 	"microservices/api/user/handler"
 	"microservices/lib/token"
@@ -40,9 +43,16 @@ func main() {
 		log.Fatal(err)
 	}
 
+	hystrix.DefaultTimeout = 5000
+
 	sClient := hystrixplugin.NewClientWrapper()(service.Options().Service.Client())
 	sClient.Init(
 		client.WrapCall(ocplugin.NewCallWrapper(t)),
+		client.Retries(3),
+		client.Retry(func(ctx context.Context, req client.Request, retryCount int, err error) (bool, error) {
+			log.Log(req.Method(), retryCount, " client retry")
+			return true, nil
+		}),
 	)
 
 	token := &token.Token{}
