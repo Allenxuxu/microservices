@@ -3,11 +3,11 @@ package main
 import (
 	"time"
 
-	"microservices/lib/token"
-	"microservices/lib/tracer"
-	_ "microservices/srv/user/db"
-	"microservices/srv/user/handler"
-	pb "microservices/srv/user/proto/user"
+	"github.com/Allenxuxu/microservices/lib/token"
+	"github.com/Allenxuxu/microservices/lib/tracer"
+	_ "github.com/Allenxuxu/microservices/srv/user/db"
+	"github.com/Allenxuxu/microservices/srv/user/handler"
+	pb "github.com/Allenxuxu/microservices/srv/user/proto/user"
 
 	"github.com/micro/go-grpc"
 	"github.com/micro/go-log"

@@ -2,9 +2,10 @@ package subscriber
 
 import (
 	"context"
+
 	"github.com/micro/go-log"
 
-	example "microservices/srv/hello/proto/example"
+	example "github.com/Allenxuxu/microservices/srv/hello/proto/example"
 )
 
 type Example struct{}

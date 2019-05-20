@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	status_code "microservices/lib/http"
+	status_code "github.com/Allenxuxu/microservices/lib/http"
 
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"

@@ -3,8 +3,8 @@ package main
 import (
 	"time"
 
-	"microservices/lib/tracer"
-	"microservices/srv/hello/handler"
+	"github.com/Allenxuxu/microservices/lib/tracer"
+	"github.com/Allenxuxu/microservices/srv/hello/handler"
 
 	"github.com/micro/go-grpc"
 	"github.com/micro/go-log"
@@ -12,7 +12,7 @@ import (
 	ocplugin "github.com/micro/go-plugins/wrapper/trace/opentracing"
 	opentracing "github.com/opentracing/opentracing-go"
 
-	example "microservices/srv/hello/proto/example"
+	example "github.com/Allenxuxu/microservices/srv/hello/proto/example"
 )
 
 func main() {

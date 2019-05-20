@@ -6,10 +6,10 @@ import (
 
 	"github.com/afex/hystrix-go/hystrix"
 
-	"microservices/api/user/handler"
-	"microservices/lib/token"
-	"microservices/lib/tracer"
-	"microservices/lib/wrapper/tracer/opentracing/gin2micro"
+	"github.com/Allenxuxu/microservices/api/user/handler"
+	"github.com/Allenxuxu/microservices/lib/token"
+	"github.com/Allenxuxu/microservices/lib/tracer"
+	"github.com/Allenxuxu/microservices/lib/wrapper/tracer/opentracing/gin2micro"
 
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-grpc"

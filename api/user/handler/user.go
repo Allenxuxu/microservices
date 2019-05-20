@@ -2,14 +2,14 @@ package handler
 
 import (
 	"errors"
-	"microservices/lib/token"
-	"microservices/lib/wrapper/tracer/opentracing/gin2micro"
+	"github.com/Allenxuxu/microservices/lib/token"
+	"github.com/Allenxuxu/microservices/lib/wrapper/tracer/opentracing/gin2micro"
 	"net/http"
 
 	// "time"
 
-	helloS "microservices/srv/hello/proto/example"
-	userS "microservices/srv/user/proto/user"
+	helloS "github.com/Allenxuxu/microservices/srv/hello/proto/example"
+	userS "github.com/Allenxuxu/microservices/srv/user/proto/user"
 
 	"github.com/gin-gonic/gin"
 	"github.com/micro/go-log"

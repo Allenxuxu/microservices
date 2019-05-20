@@ -5,12 +5,12 @@ import (
 	"net"
 	"net/http"
 
-	"microservices/lib/token"
-	"microservices/lib/tracer"
-	"microservices/lib/wrapper/auth"
-	"microservices/lib/wrapper/breaker/hystrix"
-	"microservices/lib/wrapper/metrics/prometheus"
-	"microservices/lib/wrapper/tracer/opentracing/stdhttp"
+	"github.com/Allenxuxu/microservices/lib/token"
+	"github.com/Allenxuxu/microservices/lib/tracer"
+	"github.com/Allenxuxu/microservices/lib/wrapper/auth"
+	"github.com/Allenxuxu/microservices/lib/wrapper/breaker/hystrix"
+	"github.com/Allenxuxu/microservices/lib/wrapper/metrics/prometheus"
+	"github.com/Allenxuxu/microservices/lib/wrapper/tracer/opentracing/stdhttp"
 
 	ph "github.com/afex/hystrix-go/hystrix"
 	"github.com/micro/go-plugins/micro/cors"

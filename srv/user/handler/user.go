@@ -5,9 +5,9 @@ import (
 	"errors"
 	"time"
 
-	"microservices/lib/token"
-	"microservices/srv/user/db"
-	pb "microservices/srv/user/proto/user"
+	"github.com/Allenxuxu/microservices/lib/token"
+	"github.com/Allenxuxu/microservices/srv/user/db"
+	pb "github.com/Allenxuxu/microservices/srv/user/proto/user"
 
 	"github.com/micro/go-log"
 	"github.com/satori/go.uuid"
