@@ -5,7 +5,7 @@ import (
 
 	"github.com/Allenxuxu/microservices/lib/token"
 	"github.com/Allenxuxu/microservices/lib/tracer"
-	_ "github.com/Allenxuxu/microservices/srv/user/db"
+	"github.com/Allenxuxu/microservices/srv/user/db"
 	"github.com/Allenxuxu/microservices/srv/user/handler"
 	pb "github.com/Allenxuxu/microservices/srv/user/proto/user"
 
@@ -35,6 +35,8 @@ func main() {
 	)
 	service.Init()
 
+	//从consul KV 获取 DB 配置
+	db.Init("127.0.0.1:8500")
 	token := &token.Token{}
 	token.InitConfig("127.0.0.1:8500", "micro", "config", "jwt-key", "key")
 	pb.RegisterUserServiceHandler(service.Server(), handler.New(token))

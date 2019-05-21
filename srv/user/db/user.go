@@ -24,8 +24,8 @@ type dbInfo struct {
 	DbName       string `json:"db_name"`
 }
 
-func init() {
-	consulSource := consul.NewSource()
+func Init(address string) {
+	consulSource := consul.NewSource(consul.WithAddress(address))
 	conf := config.NewConfig()
 
 	// Load file source
