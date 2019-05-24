@@ -53,6 +53,7 @@ func init() {
 const name = "API gateway"
 
 func main() {
+	stdhttp.SetSamplingFrequency(50)
 	t, io, err := tracer.NewTracer(name, "")
 	if err != nil {
 		log.Fatal(err)

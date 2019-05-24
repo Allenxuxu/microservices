@@ -16,7 +16,6 @@ import (
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro/client"
 	hystrixplugin "github.com/micro/go-plugins/wrapper/breaker/hystrix"
-	ocplugin "github.com/micro/go-plugins/wrapper/trace/opentracing"
 	web "github.com/micro/go-web"
 	opentracing "github.com/opentracing/opentracing-go"
 )
@@ -24,6 +23,7 @@ import (
 const name = "go.micro.api.user"
 
 func main() {
+	gin2micro.SetSamplingFrequency(50)
 	t, io, err := tracer.NewTracer(name, "")
 	if err != nil {
 		log.Fatal(err)
@@ -47,7 +47,7 @@ func main() {
 
 	sClient := hystrixplugin.NewClientWrapper()(service.Options().Service.Client())
 	sClient.Init(
-		client.WrapCall(ocplugin.NewCallWrapper(t)),
+		// client.WrapCall(ocplugin.NewCallWrapper(t)),
 		client.Retries(3),
 		client.Retry(func(ctx context.Context, req client.Request, retryCount int, err error) (bool, error) {
 			log.Log(req.Method(), retryCount, " client retry")

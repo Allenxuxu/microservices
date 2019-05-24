@@ -2,13 +2,29 @@ package stdhttp
 
 import (
 	"log"
+	"math/rand"
 	"net/http"
+	"time"
 
 	status_code "github.com/Allenxuxu/microservices/lib/http"
 
 	opentracing "github.com/opentracing/opentracing-go"
 	"github.com/opentracing/opentracing-go/ext"
 )
+
+// sf sampling frequency
+var sf = 100
+
+func init() {
+	rand.Seed(time.Now().Unix())
+}
+
+// SetSamplingFrequency 设置采样频率
+// 0 <= n <= 100
+func SetSamplingFrequency(n int) {
+	sf = n
+}
+
 // TracerWrapper tracer wrapper
 func TracerWrapper(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -31,6 +47,8 @@ func TracerWrapper(h http.Handler) http.Handler {
 		ext.HTTPStatusCode.Set(sp, uint16(sct.Status))
 		if sct.Status >= http.StatusInternalServerError {
 			ext.Error.Set(sp, true)
+		} else if rand.Intn(100) > sf {
+			ext.SamplingPriority.Set(sp, 0)
 		}
 	})
 }

@@ -2,7 +2,9 @@ package gin2micro
 
 import (
 	"context"
+	"math/rand"
 	"net/http"
+	"time"
 
 	"github.com/gin-gonic/gin"
 	"github.com/go-log/log"
@@ -12,6 +14,19 @@ import (
 )
 
 const contextTracerKey = "Tracer-context"
+
+// sf sampling frequency
+var sf = 100
+
+func init() {
+	rand.Seed(time.Now().Unix())
+}
+
+// SetSamplingFrequency 设置采样频率
+// 0 <= n <= 100
+func SetSamplingFrequency(n int) {
+	sf = n
+}
 
 // TracerWrapper tracer 中间件
 func TracerWrapper(c *gin.Context) {
@@ -39,7 +54,10 @@ func TracerWrapper(c *gin.Context) {
 	ext.HTTPUrl.Set(sp, c.Request.URL.EscapedPath())
 	if statusCode >= http.StatusInternalServerError {
 		ext.Error.Set(sp, true)
+	} else if rand.Intn(100) > sf {
+		ext.SamplingPriority.Set(sp, 0)
 	}
+
 }
 
 // ContextWithSpan 返回context
@@ -47,6 +65,7 @@ func ContextWithSpan(c *gin.Context) (ctx context.Context, ok bool) {
 	v, exist := c.Get(contextTracerKey)
 	if exist == false {
 		ok = false
+		ctx = context.TODO()
 		return
 	}
 
