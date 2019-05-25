@@ -10,3 +10,9 @@ run:build
 .PHONY: test
 test:
 	go test -v ./... -cover
+
+.PHONY: docker
+docker:
+	CGO_ENABLED=0 GOOS=linux go build -o micro main.go
+	docker build . -t xuxu123/micro:latest
+	rm micro

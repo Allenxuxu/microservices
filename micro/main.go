@@ -13,6 +13,7 @@ import (
 	"github.com/Allenxuxu/microservices/lib/wrapper/tracer/opentracing/stdhttp"
 
 	ph "github.com/afex/hystrix-go/hystrix"
+	"github.com/micro/cli"
 	"github.com/micro/go-plugins/micro/cors"
 	"github.com/micro/micro/cmd"
 	"github.com/micro/micro/plugin"
@@ -21,7 +22,6 @@ import (
 
 func init() {
 	token := &token.Token{}
-	token.InitConfig("127.0.0.1:8500", "micro", "config", "jwt-key", "key")
 
 	plugin.Register(cors.NewPlugin())
 
@@ -30,6 +30,17 @@ func init() {
 		plugin.WithHandler(
 			auth.JWTAuthWrapper(token),
 		),
+		plugin.WithFlag(cli.StringFlag{
+			Name:   "consul_address",
+			Usage:  "consul address for K/V",
+			EnvVar: "CONSUL_ADDRESS",
+			Value:  "127.0.0.1:8500",
+		}),
+		plugin.WithInit(func(ctx *cli.Context) error {
+			log.Println(ctx.String("consul_address"))
+			token.InitConfig(ctx.String("consul_address"), "micro", "config", "jwt-key", "key")
+			return nil
+		}),
 	))
 	plugin.Register(plugin.NewPlugin(
 		plugin.WithName("tracer"),
@@ -50,6 +61,7 @@ func init() {
 		),
 	))
 }
+
 const name = "API gateway"
 
 func main() {

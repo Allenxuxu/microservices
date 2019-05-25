@@ -14,10 +14,12 @@ build: proto
 test:
 	go test -v ./... -cover
 
-.PHONY: docker
-docker:
-	docker build . -t hello-srv:latest
-
 .PHONY: run
 run:build
 	../../build/helloSRV  --registry=consul 
+
+.PHONY: docker
+docker:
+	CGO_ENABLED=0 GOOS=linux go build -o hello-srv main.go
+	docker build . -t xuxu123/hello-srv:latest
+	rm hello-srv

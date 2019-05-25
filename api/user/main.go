@@ -12,6 +12,7 @@ import (
 	"github.com/Allenxuxu/microservices/lib/wrapper/tracer/opentracing/gin2micro"
 
 	"github.com/gin-gonic/gin"
+	"github.com/micro/cli"
 	"github.com/micro/go-grpc"
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro/client"
@@ -23,6 +24,8 @@ import (
 const name = "go.micro.api.user"
 
 func main() {
+	token := &token.Token{}
+
 	gin2micro.SetSamplingFrequency(50)
 	t, io, err := tracer.NewTracer(name, "")
 	if err != nil {
@@ -37,6 +40,15 @@ func main() {
 		web.RegisterTTL(time.Second*15),
 		web.RegisterInterval(time.Second*10),
 		web.MicroService(grpc.NewService()),
+		web.Flags(cli.StringFlag{
+			Name:   "consul_address",
+			Usage:  "consul address for K/V",
+			EnvVar: "CONSUL_ADDRESS",
+			Value:  "127.0.0.1:8500",
+		}),
+		web.Action(func(ctx *cli.Context) {
+			token.InitConfig(ctx.String("consul_address"), "micro", "config", "jwt-key", "key")
+		}),
 	)
 
 	if err := service.Init(); err != nil {
@@ -55,8 +67,6 @@ func main() {
 		}),
 	)
 
-	token := &token.Token{}
-	token.InitConfig("127.0.0.1:8500", "micro", "config", "jwt-key", "key")
 	apiService := handler.New(sClient, token)
 	router := gin.Default()
 	r := router.Group("/user")
