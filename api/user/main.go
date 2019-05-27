@@ -15,6 +15,7 @@ import (
 	"github.com/micro/cli"
 	"github.com/micro/go-grpc"
 	"github.com/micro/go-log"
+	micro "github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 	hystrixplugin "github.com/micro/go-plugins/wrapper/breaker/hystrix"
 	web "github.com/micro/go-web"
@@ -67,7 +68,9 @@ func main() {
 		}),
 	)
 
-	apiService := handler.New(sClient, token)
+	pub := micro.NewPublisher("/test", sClient)
+
+	apiService := handler.New(sClient, pub, token)
 	router := gin.Default()
 	r := router.Group("/user")
 	r.Use(gin2micro.TracerWrapper)

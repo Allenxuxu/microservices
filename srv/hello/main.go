@@ -1,11 +1,13 @@
 package main
 
 import (
+	"context"
 	"time"
 
 	"github.com/Allenxuxu/microservices/lib/tracer"
 	"github.com/Allenxuxu/microservices/srv/hello/handler"
 
+	"github.com/micro/examples/server/subscriber"
 	"github.com/micro/go-grpc"
 	"github.com/micro/go-log"
 	"github.com/micro/go-micro"
@@ -14,6 +16,11 @@ import (
 
 	example "github.com/Allenxuxu/microservices/srv/hello/proto/example"
 )
+
+func Handler(ctx context.Context, msg *example.Message) error {
+	log.Log("Function Received message: ", msg.Say)
+	return nil
+}
 
 func main() {
 	// New Service
@@ -41,8 +48,8 @@ func main() {
 	// // Register Struct as Subscriber
 	// micro.RegisterSubscriber("go.micro.srv.hello", service.Server(), new(subscriber.Example))
 
-	// // Register Function as Subscriber
-	// micro.RegisterSubscriber("go.micro.srv.hello", service.Server(), subscriber.Handler)
+	// Register Function as Subscriber
+	micro.RegisterSubscriber("/test", service.Server(), subscriber.Handler)
 
 	// Run service
 	if err := service.Run(); err != nil {
