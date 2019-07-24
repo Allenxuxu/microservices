@@ -3,7 +3,7 @@ package subscriber
 import (
 	"context"
 
-	"github.com/micro/go-log"
+	"github.com/micro/go-micro/util/log"
 
 	example "github.com/Allenxuxu/microservices/srv/hello/proto/example"
 )

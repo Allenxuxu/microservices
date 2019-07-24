@@ -13,12 +13,12 @@ import (
 
 	"github.com/gin-gonic/gin"
 	"github.com/micro/cli"
-	"github.com/micro/go-grpc"
-	"github.com/micro/go-log"
+	"github.com/micro/go-micro/service/grpc"
+	"github.com/micro/go-micro/util/log"
 	micro "github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 	hystrixplugin "github.com/micro/go-plugins/wrapper/breaker/hystrix"
-	web "github.com/micro/go-web"
+	web "github.com/micro/go-micro/web"
 	opentracing "github.com/opentracing/opentracing-go"
 )
 

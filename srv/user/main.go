@@ -10,8 +10,8 @@ import (
 	pb "github.com/Allenxuxu/microservices/srv/user/proto/user"
 
 	"github.com/micro/cli"
-	"github.com/micro/go-grpc"
-	"github.com/micro/go-log"
+	"github.com/micro/go-micro/service/grpc"
+	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-micro"
 	ocplugin "github.com/micro/go-plugins/wrapper/trace/opentracing"
 	opentracing "github.com/opentracing/opentracing-go"

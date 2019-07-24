@@ -8,13 +8,11 @@ import (
 	"github.com/Allenxuxu/microservices/lib/token"
 	"github.com/Allenxuxu/microservices/lib/wrapper/tracer/opentracing/gin2micro"
 
-	// "time"
-
 	helloS "github.com/Allenxuxu/microservices/srv/hello/proto/example"
 	userS "github.com/Allenxuxu/microservices/srv/user/proto/user"
 
 	"github.com/gin-gonic/gin"
-	"github.com/micro/go-log"
+	"github.com/micro/go-micro/util/log"
 	micro "github.com/micro/go-micro"
 	"github.com/micro/go-micro/client"
 )

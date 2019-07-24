@@ -4,12 +4,12 @@ package prometheus
 import (
 	"net/http"
 
-	 "github.com/prometheus/client_golang/prometheus"
+	p "github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-// MetricsWrapper prometheus 
+// MetricsWrapper prometheus
 func MetricsWrapper(h http.Handler) http.Handler {
-	ph := prometheus.Handler()
+	ph := p.Handler()
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Path == "/metrics" {
 			ph.ServeHTTP(w, r)

@@ -8,8 +8,8 @@ import (
 	"github.com/Allenxuxu/microservices/srv/hello/handler"
 
 	"github.com/micro/examples/server/subscriber"
-	"github.com/micro/go-grpc"
-	"github.com/micro/go-log"
+	"github.com/micro/go-micro/service/grpc"
+	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-micro"
 	ocplugin "github.com/micro/go-plugins/wrapper/trace/opentracing"
 	opentracing "github.com/opentracing/opentracing-go"

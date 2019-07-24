@@ -4,10 +4,10 @@ import (
 	"fmt"
 	pb "github.com/Allenxuxu/microservices/srv/user/proto/user"
 
-	"github.com/micro/go-log"
+	"github.com/micro/go-micro/util/log"
 
-	config "github.com/micro/go-config"
-	"github.com/micro/go-config/source/consul"
+	config "github.com/micro/go-micro/config"
+	"github.com/micro/go-micro/config/source/consul"
 
 	"github.com/jinzhu/gorm"
 	//初始化数据库驱动

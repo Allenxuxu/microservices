@@ -9,7 +9,7 @@ import (
 	"github.com/Allenxuxu/microservices/srv/user/db"
 	pb "github.com/Allenxuxu/microservices/srv/user/proto/user"
 
-	"github.com/micro/go-log"
+	"github.com/micro/go-micro/util/log"
 	"github.com/satori/go.uuid"
 )
 

@@ -8,7 +8,7 @@ proto:
 
 .PHONY: build
 build: proto
-	go build -o ../../build/helloSRV main.go plugin.go
+	go build -o ../../build/helloSRV main.go
 
 .PHONY: test
 test:
