@@ -1,0 +1,53 @@
+version: '3.1'
+
+services:
+
+  ####注册中心####
+  consul:
+    image: consul:latest
+    user : root
+    command: consul agent -server -ui -data-dir=/data -bootstrap-expect=1 -client=0.0.0.0 -disable-host-node-id
+    hostname: consul
+    ports:
+      - "8500:8500"
+    volumes:
+      - "./data:/data"
+    networks:
+      - microservices-net
+  ####监控####
+  prometheus:
+    image: prom/prometheus
+    ports:
+      - "9090:9090"
+    networks:
+      - microservices-net
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+
+  ####hystrix熔断仪表盘####
+  hystrix-dashboard:
+    image: mlabouardy/hystrix-dashboard
+    ports:
+      - "8081:9002"
+    networks:
+      - microservices-net
+
+  ####jaeger链路追踪###
+  jaeger:
+    image: jaegertracing/all-in-one:1.6
+    environment:
+      - COLLECTOR_ZIPKIN_HTTP_PORT=9411
+    ports:
+      - "5775:5775/udp"
+      - "6831:6831/udp"
+      - "6832:6832/udp"
+      - "5778:5778"
+      - "16686:16686"
+      - "14268:14268"
+      - "9411:9411"
+    networks:
+      - microservices-net
+
+networks:
+    microservices-net:
+        driver: bridge
