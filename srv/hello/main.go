@@ -6,17 +6,13 @@ import (
 
 	"github.com/Allenxuxu/microservices/lib/tracer"
 	"github.com/Allenxuxu/microservices/srv/hello/handler"
-
-	//"github.com/micro/examples/server/subscriber"
+	example "github.com/Allenxuxu/microservices/srv/hello/proto/example"
 	"github.com/Allenxuxu/microservices/srv/hello/subscriber"
-
+	"github.com/micro/go-micro"
 	"github.com/micro/go-micro/service/grpc"
 	"github.com/micro/go-micro/util/log"
-	"github.com/micro/go-micro"
 	ocplugin "github.com/micro/go-plugins/wrapper/trace/opentracing"
 	opentracing "github.com/opentracing/opentracing-go"
-
-	example "github.com/Allenxuxu/microservices/srv/hello/proto/example"
 )
 
 func Handler(ctx context.Context, msg *example.Message) error {
