@@ -7,7 +7,9 @@ import (
 	"github.com/Allenxuxu/microservices/lib/tracer"
 	"github.com/Allenxuxu/microservices/srv/hello/handler"
 
-	"github.com/micro/examples/server/subscriber"
+	//"github.com/micro/examples/server/subscriber"
+	"github.com/Allenxuxu/microservices/srv/hello/subscriber"
+
 	"github.com/micro/go-micro/service/grpc"
 	"github.com/micro/go-micro/util/log"
 	"github.com/micro/go-micro"
