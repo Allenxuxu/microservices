@@ -30,10 +30,7 @@
 - hystrix-dashboard (hystrix熔断仪表盘)
 - mysql 
 
-## 配置文件
----
-prometheus 简单参考配置文件  
-**prometheus启动需要用以下内容生成配置文件/tmp/conf.yml**
+> prometheus 参考配置文件  
 ```
 global:
   scrape_interval: 15s
@@ -56,10 +53,11 @@ scrape_configs:
   - targets:
     - 10.104.34.106:8080   #10.104.34.106为本机ip， 本机127.0.0.1在容器中无法访问到
 ```
+
 ### docker启动参考命令
 - consul
   > docker run --name consul -d -p 8500:8500/tcp consul agent -server -ui -bootstrap-expect=1 -client=0.0.0.0
-- prometheus
+- prometheus  （启动时依赖本机配置文件 `/tmp/conf.yml` , 可更改命令自定义路径）
   > docker run --name prometheus  -d -p 0.0.0.0:9090:9090 -v /tmp/conf.yml:/etc/prometheus/prometheus.yml   prom/prometheus
 - jaeger
   > docker run -d --name jaeger \
