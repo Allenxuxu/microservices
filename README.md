@@ -1,9 +1,10 @@
 
 # microservices
-使用micro微服务框架的一些例子，包含微服务开发中必备的鉴权，熔断，监控，链路追踪等
+使用micro微服务框架的一些例子，包含微服务开发中必备的鉴权，熔断，监控，链路追踪，跨域等
 
 ## 主要内容
 - 扩展micro的API网关功能
+  - 跨域
   - JWT鉴权
   - 熔断
   - prometheus监控
@@ -17,6 +18,21 @@
 ### 实现详解
 各部分实现，都在博客中有相应博文讲解
 [个人博客](https://note.mogutou.xyz/category/go-micro)
+
+## 跨域配置
+
+要实现跨域，只需要在 micro api（micro API 网关）注册相关插件，并且通过命令行指定跨域相关信息即可。
+
+```go
+plugin.Register(cors.NewPlugin())
+```
+
+```bash
+micro api 
+--cors-allowed-headers=X-Custom-Header,X-Header 
+--cors-allowed-origins=someotherdomain.com,xx.com 
+--cors-allowed-methods=POST
+```
 
 > 本项目使用consul的K/V存储来模拟一个配置中心。在每一个使用到lib/token包的服务都会在main函数里传递consul地址和JWT私钥的加载路径。在srv/user服务中同样，使用consul K/V 来存储mysql数据库的配置。在启动服务之前，需要现在consul的K/V中设置好这些配置。
 
