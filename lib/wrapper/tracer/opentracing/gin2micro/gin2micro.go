@@ -30,12 +30,19 @@ func SetSamplingFrequency(n int) {
 
 // TracerWrapper tracer 中间件
 func TracerWrapper(c *gin.Context) {
+	sp := opentracing.GlobalTracer().StartSpan(c.Request.URL.Path)
+	tracer := opentracing.GlobalTracer()
 	md := make(map[string]string)
-	spanCtx, _ := opentracing.GlobalTracer().Extract(opentracing.HTTPHeaders, opentracing.HTTPHeadersCarrier(c.Request.Header))
-	sp := opentracing.GlobalTracer().StartSpan(c.Request.URL.Path, opentracing.ChildOf(spanCtx))
+	nsf := sf
+	spanCtx, err := opentracing.GlobalTracer().Extract(opentracing.HTTPHeaders, opentracing.HTTPHeadersCarrier(c.Request.Header))
+	if err == nil {
+		sp = opentracing.GlobalTracer().StartSpan(c.Request.URL.Path, opentracing.ChildOf(spanCtx))
+		tracer = sp.Tracer()
+		nsf = 100
+	}
 	defer sp.Finish()
 
-	if err := opentracing.GlobalTracer().Inject(sp.Context(),
+	if err := tracer.Inject(sp.Context(),
 		opentracing.TextMap,
 		opentracing.TextMapCarrier(md)); err != nil {
 		log.Log(err)
@@ -54,10 +61,9 @@ func TracerWrapper(c *gin.Context) {
 	ext.HTTPUrl.Set(sp, c.Request.URL.EscapedPath())
 	if statusCode >= http.StatusInternalServerError {
 		ext.Error.Set(sp, true)
-	} else if rand.Intn(100) > sf {
+	} else if rand.Intn(100) > nsf {
 		ext.SamplingPriority.Set(sp, 0)
 	}
-
 }
 
 // ContextWithSpan 返回context
